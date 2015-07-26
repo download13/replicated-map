@@ -24,5 +24,8 @@
   "homepage": "https://github.com/download13/replicated-map#readme",
   "dependencies": {
     "foreach": "^2.0.5"
+  },
+  "devDependencies": {
+    "through2": "^2.0.0"
   }
 }
