@@ -1,11 +1,20 @@
 var each = require('foreach');
 
+var EventEmitter = require('events').EventEmitter;
+
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 
 function ReplicatedMap() {
+	EventEmitter.call(this);
+
+	// Bind so people can shortcut events handlers
+	this.cmd = this.cmd.bind(this);
+
 	this._state = Object.create(null);
 }
+
+ReplicatedMap.prototype = Object.create(EventEmitter.prototype);
 
 ReplicatedMap.prototype.get = function(key) {
 	return this._state[key];
