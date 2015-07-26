@@ -8,6 +8,16 @@ var EventEmitter = require('events').EventEmitter;
 
 
 describe('ReplicatedMap', function() {
+	it('is creatable', function() {
+		var rm1 = new ReplicatedMap();
+
+		var rm2 = ReplicatedMap();
+
+		assert(rm1 instanceof ReplicatedMap);
+
+		assert(rm2 instanceof ReplicatedMap);
+	});
+
 	it('sets/gets', function() {
 		var rm = new ReplicatedMap();
 

@@ -6,6 +6,10 @@ var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 
 function ReplicatedMap() {
+	if(!(this instanceof ReplicatedMap)) {
+		return new ReplicatedMap();
+	}
+
 	EventEmitter.call(this);
 
 	// Bind so people can shortcut events handlers
