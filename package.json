@@ -1,0 +1,28 @@
+{
+  "name": "replicated-map",
+  "version": "0.0.0",
+  "description": "A Map object with tools for easily keeping replicas in sync across a data stream",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/download13/replicated-map.git"
+  },
+  "keywords": [
+    "map",
+    "hashmap",
+    "replicated",
+    "synchronized"
+  ],
+  "author": "Erin Dachtler <download333@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/download13/replicated-map/issues"
+  },
+  "homepage": "https://github.com/download13/replicated-map#readme",
+  "dependencies": {
+    "foreach": "^2.0.5"
+  }
+}
