@@ -73,6 +73,22 @@ setTimeout(function() {
 ```
 
 
+## Events
+
+The map is also an event emitter which emits `set` events when a key is set and `remove` events when one is removed.
+
+```javascript
+rm.on('set', function(value, key, oldValue) {
+	// Update some state or something
+	console.log(key + ' is now ' + value + ' but was ' + oldValue);
+});
+
+rm.on('remove', function(key, oldValue) {
+	console.log(key + ' has been removed but was ' + oldValue);
+});
+```
+
+
 ## Notes
 
 The path of transmission must carry the messages IN ORDER. If the messages are out of order the accuracy of the replication cannot be guaranteed. Imagine doing `set key 3` and `set key 7`. If they are out of the order the older command may overwrite the newer one.
