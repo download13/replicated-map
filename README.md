@@ -14,7 +14,7 @@ rm.set('testkey', 'somevalue');
 
 console.log(rm.get('testkey')); // somevalue
 
-rm.remove('testkey');
+rm.delete('testkey');
 
 console.log(rm.has('testkey')); // false
 ```
@@ -44,7 +44,7 @@ rm.replicate(function(cmd, args) {
 	}));
 });
 
-// All set and remove commands will be replicated to the follower
+// All set and delete commands will be replicated to the follower
 // keeping it in a consistent state with this one
 rm.set('another_new', 'val');
 ```
@@ -83,8 +83,8 @@ rm.on('set', function(value, key, oldValue) {
 	console.log(key + ' is now ' + value + ' but was ' + oldValue);
 });
 
-rm.on('remove', function(key, oldValue) {
-	console.log(key + ' has been removed but was ' + oldValue);
+rm.on('delete', function(key, oldValue) {
+	console.log(key + ' has been deleted but was ' + oldValue);
 });
 
 rm.on('clear', function() {
@@ -97,7 +97,7 @@ rm.on('clear', function() {
 * `.has(key)` - Returns whether or not the map contains a key
 * `.get(key)` - Returns value of key
 * `.set(key, value)` - Set value of key
-* `.remove(key)` - Removes a key from the map
+* `.delete(key)` - Removes a key from the map
 * `.clear()` - Clears all key/value pairs from the map
 * `.keys()` - Returns an array of the map keys
 * `.values()` - Returns an array of the map values

@@ -88,7 +88,7 @@ describe('ReplicatedMap', function() {
 
 		assert(rm.has('test'));
 
-		rm.remove('test');
+		rm.delete('test');
 
 		assert(!rm.has('test'));
 	});
@@ -116,7 +116,7 @@ describe('ReplicatedMap', function() {
 
 		assert.equal(rm._state.j, 'k');
 
-		rm.cmd('remove', ['j']);
+		rm.cmd('delete', ['j']);
 
 		assert.deepEqual(rm._state, {});
 	});

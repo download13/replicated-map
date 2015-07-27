@@ -52,12 +52,12 @@ ReplicatedMap.prototype.set = function(key, value) {
 	this.emit('set', key, value, oldValue);
 };
 
-ReplicatedMap.prototype.remove = function(key) {
+ReplicatedMap.prototype.delete = function(key) {
 	var oldValue = this._state[key];
 
 	delete this._state[key];
 
-	this.emit('remove', key, oldValue);
+	this.emit('delete', key, oldValue);
 };
 
 ReplicatedMap.prototype.clear = function() {
@@ -71,7 +71,7 @@ ReplicatedMap.prototype.clear = function() {
 ReplicatedMap.prototype.cmd = function(cmd, args) {
 	switch(cmd) {
 	case 'set':
-	case 'remove':
+	case 'delete':
 	case 'clear':
 		this[cmd].apply(this, args);
 	}
@@ -92,8 +92,8 @@ ReplicatedMap.prototype.replicate = function(fn) {
 		fn('set', [key, value]);
 	}
 
-	function remove(key) {
-		fn('remove', [key]);
+	function del(key) {
+		fn('delete', [key]);
 	}
 
 	function clear(key) {
@@ -101,13 +101,13 @@ ReplicatedMap.prototype.replicate = function(fn) {
 	}
 
 	self.on('set', set);
-	self.on('remove', remove);
+	self.on('delete', del);
 	self.on('clear', clear);
 
 	// Call this to stop replicating
 	return function() {
 		self.removeListener('set', set);
-		self.removeListener('remove', remove);
+		self.removeListener('delete', del);
 		self.removeListener('clear', clear);
 	};
 };
