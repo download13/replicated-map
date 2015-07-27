@@ -1,6 +1,6 @@
 # replicated-map
 
-ReplicatedMap your standard HashMap-type dealio, but with helper methods that make it easy to replicate it's state from one map to the next. Even across the network!
+ReplicatedMap is your standard HashMap-type dealio, but with helper methods that make it easy to replicate it's state from one map to the next. Even across the network!
 
 
 ## Basic Map Example
