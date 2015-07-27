@@ -18,6 +18,36 @@ describe('ReplicatedMap', function() {
 		assert(rm2 instanceof ReplicatedMap);
 	});
 
+	it('keys/values', function() {
+		var rm = new ReplicatedMap();
+
+		rm.set('teststring', 'string');
+
+		rm.set('testnumber', 0);
+
+		rm.set('testbool', true);
+
+		rm.set('testarray', [5]);
+
+		rm.set('testobject', {t: 1});
+
+		assert.deepEqual(rm.keys(), [
+			'teststring',
+			'testnumber',
+			'testbool',
+			'testarray',
+			'testobject'
+		]);
+
+		assert.deepEqual(rm.values(), [
+			'string',
+			0,
+			true,
+			[5],
+			{t: 1}
+		]);
+	});
+
 	it('sets/gets', function() {
 		var rm = new ReplicatedMap();
 
@@ -61,6 +91,22 @@ describe('ReplicatedMap', function() {
 		rm.remove('test');
 
 		assert(!rm.has('test'));
+	});
+
+	it('clears', function() {
+		var rm = new ReplicatedMap();
+
+		rm.set('test', true);
+
+		rm.set('test2', true);
+
+		assert(rm.has('test'));
+
+		rm.clear();
+
+		assert(!rm.has('test'));
+
+		assert(!rm.has('test2'));
 	});
 
 	it('takes cmds', function() {

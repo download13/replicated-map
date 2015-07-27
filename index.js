@@ -32,6 +32,18 @@ ReplicatedMap.prototype.forEach = function(fn) {
 	each(this._state, fn);
 };
 
+ReplicatedMap.prototype.keys = function() {
+	return Object.keys(this._state);
+};
+
+ReplicatedMap.prototype.values = function() {
+	var state = this._state;
+
+	return this.keys().map(function(key) {
+		return state[key];
+	});
+};
+
 ReplicatedMap.prototype.set = function(key, value) {
 	var oldValue = this._state[key];
 
@@ -48,10 +60,19 @@ ReplicatedMap.prototype.remove = function(key) {
 	this.emit('remove', key, oldValue);
 };
 
+ReplicatedMap.prototype.clear = function() {
+	this._state = Object.create(null);
+
+	this.emit('clear');
+};
+
 // This should be called by a function bringing in new
 // data from a remote location
 ReplicatedMap.prototype.cmd = function(cmd, args) {
-	if(cmd === 'set' || cmd === 'remove') {
+	switch(cmd) {
+	case 'set':
+	case 'remove':
+	case 'clear':
 		this[cmd].apply(this, args);
 	}
 };
@@ -75,13 +96,19 @@ ReplicatedMap.prototype.replicate = function(fn) {
 		fn('remove', [key]);
 	}
 
+	function clear(key) {
+		fn('clear', []);
+	}
+
 	self.on('set', set);
 	self.on('remove', remove);
+	self.on('clear', clear);
 
 	// Call this to stop replicating
 	return function() {
 		self.removeListener('set', set);
 		self.removeListener('remove', remove);
+		self.removeListener('clear', clear);
 	};
 };
 
