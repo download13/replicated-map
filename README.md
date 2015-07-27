@@ -94,16 +94,16 @@ rm.on('clear', function() {
 
 ## Methods
 
-`.has(key)` - Returns whether or not the map contains a key
-`.get(key)` - Returns value of key
-`.set(key, value)` - Set value of key
-`.remove(key)` - Removes a key from the map
-`.clear()` - Clears all key/value pairs from the map
-`.keys()` - Returns an array of the map keys
-`.values()` - Returns an array of the map values
-`.forEach(fn)` - fn(value, key) is executed once for each key/value pair
-`.cmd(command, arguments)` - Executes the given command on this map
-`.replicate(fn)` - Calls fn(cmd, args) once for each command needed to replicate the state of this map to another map
+* `.has(key)` - Returns whether or not the map contains a key
+* `.get(key)` - Returns value of key
+* `.set(key, value)` - Set value of key
+* `.remove(key)` - Removes a key from the map
+* `.clear()` - Clears all key/value pairs from the map
+* `.keys()` - Returns an array of the map keys
+* `.values()` - Returns an array of the map values
+* `.forEach(fn)` - fn(value, key) is executed once for each key/value pair
+* `.cmd(command, arguments)` - Executes the given command on this map
+* `.replicate(fn)` - Calls fn(cmd, args) once for each command needed to replicate the state of this map to another map
 
 
 
