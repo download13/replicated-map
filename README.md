@@ -75,7 +75,7 @@ setTimeout(function() {
 
 ## Events
 
-The map is also an event emitter which emits `set` events when a key is set and `remove` events when one is removed.
+The map is also an event emitter which emits the following events.
 
 ```javascript
 rm.on('set', function(value, key, oldValue) {
@@ -85,6 +85,10 @@ rm.on('set', function(value, key, oldValue) {
 
 rm.on('remove', function(key, oldValue) {
 	console.log(key + ' has been removed but was ' + oldValue);
+});
+
+rm.on('clear', function() {
+	console.log('Oh no! Everything is gone!');
 });
 ```
 
