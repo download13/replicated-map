@@ -51,6 +51,12 @@ describe('ReplicatedMap', function() {
 	it('sets/gets', function() {
 		var rm = new ReplicatedMap();
 
+		var events = [];
+
+		rm.on('set', function(k, v) {
+			events.push([k, v]);
+		});
+
 		rm.set('teststring', 'string');
 
 		rm.set('testnumber', 0);
@@ -79,10 +85,24 @@ describe('ReplicatedMap', function() {
 		assert.deepEqual(rm.get('testarray'), [5]);
 
 		assert.deepEqual(rm.get('testobject'), {t: 1});
+
+		assert.deepEqual(events, [
+			['teststring', 'string'],
+			['testnumber', 0],
+			['testbool', true],
+			['testarray', [5]],
+			['testobject', {t: 1}]
+		]);
 	});
 
-	it('removes/has', function() {
+	it('deletes/has', function() {
 		var rm = new ReplicatedMap();
+
+		var events = [];
+
+		rm.on('delete', function(k) {
+			events.push(k);
+		});
 
 		rm.set('test', true);
 
@@ -91,10 +111,18 @@ describe('ReplicatedMap', function() {
 		rm.delete('test');
 
 		assert(!rm.has('test'));
+
+		assert.deepEqual(events, ['test']);
 	});
 
 	it('clears', function() {
 		var rm = new ReplicatedMap();
+
+		var events = [];
+
+		rm.on('clear', function(k) {
+			events.push(true);
+		});
 
 		rm.set('test', true);
 
@@ -107,6 +135,27 @@ describe('ReplicatedMap', function() {
 		assert(!rm.has('test'));
 
 		assert(!rm.has('test2'));
+
+		assert.deepEqual(events, [true]);
+	});
+
+	it('loops', function() {
+		// TODO: foreach
+		var rm = new ReplicatedMap();
+
+		rm.set('t', 1);
+		rm.set('g', true);
+
+		var r = [];
+
+		rm.forEach(function(v, k) {
+			r.push([v, k]);
+		});
+
+		assert.deepEqual(r, [
+			[1, 't'],
+			[true, 'g']
+		]);
 	});
 
 	it('takes cmds', function() {
