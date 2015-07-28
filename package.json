@@ -1,6 +1,6 @@
 {
   "name": "replicated-map",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Map object with tools for easily keeping replicas in sync across a data stream",
   "main": "index.js",
   "scripts": {
