@@ -112,3 +112,5 @@ rm.on('clear', function() {
 The method used to stream data must carry the messages IN ORDER. If the messages are out of order the accuracy of the replication cannot be guaranteed. Imagine doing `set key 3` and `set key 7`. If they are out of the order the older command may overwrite the newer one.
 
 Please note, this is not an exact stand-in for the standard `Map` type. It's backed by an object and so it can on only take primitive values as keys (strings, numbers, booleans).
+
+Do not call the mutating methods on a following map, this will result in the follower being out of sync with the leader.
