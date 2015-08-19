@@ -1,10 +1,12 @@
 {
   "name": "replicated-map",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A Map object with tools for easily keeping replicas in sync across a data stream",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "npm run compile && mocha",
+    "compile": "babel -d lib/ src/",
+    "prepublish": "npm run compile"
   },
   "repository": {
     "type": "git",
@@ -22,10 +24,8 @@
     "url": "https://github.com/download13/replicated-map/issues"
   },
   "homepage": "https://github.com/download13/replicated-map#readme",
-  "dependencies": {
-    "foreach": "^2.0.5"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "through2": "^2.0.0"
+    "babel": "^5.8.21"
   }
 }
